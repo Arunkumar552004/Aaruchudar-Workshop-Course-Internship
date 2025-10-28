@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./RegisterForm.css"; // Make sure CSS exists
 
 export default function RegisterForm() {
   const [form, setForm] = useState({
@@ -11,15 +12,17 @@ export default function RegisterForm() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
-  // 👇 Automatically uses environment variable or Render URL
+  // ✅ Auto-detect environment (local + deployed)
   const API_URL =
-    import.meta.env.VITE_API_URL ||
+    (import.meta.env.VITE_API_URL?.replace(/\/+$/, "")) ||
     "https://aaruchudar-workshop-course-internship.onrender.com";
 
+  // ✅ Handle input changes
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+  // ✅ Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -28,25 +31,24 @@ export default function RegisterForm() {
     try {
       const res = await fetch(`${API_URL}/api/register`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
 
       const data = await res.json();
+
       if (data.success) {
         setMessage("✅ Registration Successful!");
         setForm({ name: "", email: "", course: "", phone: "" });
       } else {
-        setMessage("❌ Registration Failed. Try again.");
+        setMessage("❌ Registration Failed. Please try again.");
       }
     } catch (error) {
-      console.error("Error:", error);
-      setMessage("⚠️ Server error. Please try later.");
+      console.error("Error submitting registration:", error);
+      setMessage("⚠️ Server Error. Please try later.");
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
   };
 
   return (
@@ -59,6 +61,7 @@ export default function RegisterForm() {
       <div className="form-wrapper">
         <div className="form-box show">
           <h2>Course Registration</h2>
+
           <form onSubmit={handleSubmit}>
             <label>Full Name</label>
             <input
@@ -97,18 +100,20 @@ export default function RegisterForm() {
 
             <label>Phone Number</label>
             <input
+              type="tel"
               name="phone"
               value={form.phone}
               onChange={handleChange}
               placeholder="Enter your phone number"
+              required
             />
 
             <button type="submit" className="btn" disabled={loading}>
               {loading ? "Submitting..." : "Register"}
             </button>
-
-            {message && <p className="form-message">{message}</p>}
           </form>
+
+          {message && <p className="form-message">{message}</p>}
         </div>
       </div>
     </section>

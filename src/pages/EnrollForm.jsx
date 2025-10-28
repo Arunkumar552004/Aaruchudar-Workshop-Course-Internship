@@ -11,37 +11,51 @@ export default function EnrollForm() {
   });
 
   const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  // 👇 Automatically switch between local & deployed backend
+  // ✅ Safely get backend URL (works both locally & on Render)
   const API_URL =
-    import.meta.env.VITE_API_URL ||
+    (import.meta.env.VITE_API_URL?.replace(/\/+$/, "")) ||
     "https://aaruchudar-workshop-course-internship.onrender.com";
 
+  // ✅ Handle input change
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
 
+  // ✅ Handle form submit
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     setMessage("");
 
     try {
       const res = await axios.post(`${API_URL}/api/enroll`, form);
+
       if (res.data.success) {
         setMessage("🎉 Enrollment Successful!");
-        setForm({ name: "", email: "", workshop: "", phone: "" });
+        setForm({
+          name: "",
+          email: "",
+          workshop: "",
+          phone: "",
+        });
       } else {
-        setMessage("⚠️ Something went wrong.");
+        setMessage("⚠️ Enrollment failed. Please try again.");
       }
     } catch (error) {
-      console.error("Error:", error);
-      setMessage("❌ Server Error. Please try again.");
+      console.error("Error submitting enrollment:", error);
+      setMessage("❌ Server Error. Please try again later.");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <section className="apply-section">
       <h1 className="title">Enroll for Courses</h1>
-      <p className="subtitle">Join Aaruchudar’s specialized learning programs.</p>
+      <p className="subtitle">
+        Join Aaruchudar’s specialized learning programs.
+      </p>
 
       <div className="form-wrapper">
         <div className="form-box show">
@@ -84,15 +98,16 @@ export default function EnrollForm() {
 
             <label>Phone Number</label>
             <input
-              type="text"
+              type="tel"
               name="phone"
               value={form.phone}
               onChange={handleChange}
               placeholder="Enter your phone number"
+              required
             />
 
-            <button type="submit" className="btn">
-              Enroll Now
+            <button type="submit" className="btn" disabled={loading}>
+              {loading ? "Submitting..." : "Enroll Now"}
             </button>
           </form>
 

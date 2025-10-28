@@ -12,14 +12,16 @@ export default function ApplyForm() {
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // ✅ Use environment variable if available, otherwise fallback to localhost
+  // ✅ Safely detect environment and set API base URL
   const API_URL =
-    import.meta.env.VITE_API_URL ||
+    (import.meta.env.VITE_API_URL?.replace(/\/+$/, "")) ||
     "https://aaruchudar-workshop-course-internship.onrender.com";
 
+  // ✅ Handle input change
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
 
+  // ✅ Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -47,7 +49,7 @@ export default function ApplyForm() {
       }
     } catch (error) {
       console.error("Error submitting application:", error);
-      setMessage("⚠️ Server error. Please try later.");
+      setMessage("⚠️ Server error. Please try again later.");
     } finally {
       setLoading(false);
     }
