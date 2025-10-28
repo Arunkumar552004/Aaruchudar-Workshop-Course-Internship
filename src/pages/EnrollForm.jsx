@@ -12,6 +12,11 @@ export default function EnrollForm() {
 
   const [message, setMessage] = useState("");
 
+  // 👇 Automatically switch between local & deployed backend
+  const API_URL =
+    import.meta.env.VITE_API_URL ||
+    "https://aaruchudar-workshop-course-internship.onrender.com";
+
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
 
@@ -20,7 +25,7 @@ export default function EnrollForm() {
     setMessage("");
 
     try {
-      const res = await axios.post("http://localhost:5000/api/enroll", form);
+      const res = await axios.post(`${API_URL}/api/enroll`, form);
       if (res.data.success) {
         setMessage("🎉 Enrollment Successful!");
         setForm({ name: "", email: "", workshop: "", phone: "" });

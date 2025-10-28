@@ -12,6 +12,11 @@ export default function ApplyForm() {
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
+  // ✅ Use environment variable if available, otherwise fallback to localhost
+  const API_URL =
+    import.meta.env.VITE_API_URL ||
+    "https://aaruchudar-workshop-course-internship.onrender.com";
+
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
 
@@ -21,7 +26,7 @@ export default function ApplyForm() {
     setMessage("");
 
     try {
-      const res = await fetch("http://localhost:5000/api/apply", {
+      const res = await fetch(`${API_URL}/api/apply`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),

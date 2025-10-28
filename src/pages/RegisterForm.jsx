@@ -11,6 +11,11 @@ export default function RegisterForm() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
+  // 👇 Automatically uses environment variable or Render URL
+  const API_URL =
+    import.meta.env.VITE_API_URL ||
+    "https://aaruchudar-workshop-course-internship.onrender.com";
+
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -21,7 +26,7 @@ export default function RegisterForm() {
     setMessage("");
 
     try {
-      const res = await fetch("http://localhost:5000/api/register", {
+      const res = await fetch(`${API_URL}/api/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -47,7 +52,9 @@ export default function RegisterForm() {
   return (
     <section className="register-section">
       <h1 className="title">Register for a Course</h1>
-      <p className="subtitle">Be part of Aaruchudar’s premium learning experience.</p>
+      <p className="subtitle">
+        Be part of Aaruchudar’s premium learning experience.
+      </p>
 
       <div className="form-wrapper">
         <div className="form-box show">
@@ -80,7 +87,9 @@ export default function RegisterForm() {
               required
             >
               <option value="">-- Select Course --</option>
-              <option value="Full Stack Development">Full Stack Development</option>
+              <option value="Full Stack Development">
+                Full Stack Development
+              </option>
               <option value="UI/UX Design">UI/UX Design</option>
               <option value="AI & Data Science">AI & Data Science</option>
               <option value="Cloud Computing">Cloud Computing</option>
