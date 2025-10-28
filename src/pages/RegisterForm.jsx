@@ -12,9 +12,9 @@ export default function RegisterForm() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
-  // ✅ Auto-detect environment (local + deployed)
+  // ✅ Use Render backend or fallback to localhost for local testing
   const API_URL =
-    (import.meta.env.VITE_API_URL?.replace(/\/+$/, "")) ||
+    import.meta.env.VITE_API_URL?.trim() ||
     "https://aaruchudar-workshop-course-internship.onrender.com";
 
   // ✅ Handle input changes
@@ -45,7 +45,7 @@ export default function RegisterForm() {
       }
     } catch (error) {
       console.error("Error submitting registration:", error);
-      setMessage("⚠️ Server Error. Please try later.");
+      setMessage("⚠️ Server Error. Please try again later.");
     } finally {
       setLoading(false);
     }
