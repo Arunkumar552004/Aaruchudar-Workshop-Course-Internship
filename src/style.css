@@ -1,0 +1,293 @@
+/* 🌌 Global Body */
+body {
+  background: radial-gradient(circle at top, #0a0a3f, #000);
+  font-family: "Poppins", sans-serif;
+  overflow-x: hidden;
+  color: #fff;
+  margin: 0;
+}
+
+/* 🌠 Section Styling */
+section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  text-align: center;
+  position: relative;
+  color: #fff;
+  overflow: hidden;
+  background: radial-gradient(circle at center, #0a0a3f, #000);
+}
+
+.section-title,
+.title {
+  font-size: 2.8rem;
+  font-weight: 700;
+  text-shadow: 0 0 20px #00f7ff;
+  margin-bottom: 0.5rem;
+  letter-spacing: 1px;
+  animation: fadeInDown 1s ease forwards;
+}
+
+.section-subtitle,
+.subtitle {
+  font-size: 1.1rem;
+  color: #bbb;
+  margin-bottom: 3rem;
+  animation: fadeInUp 1.2s ease forwards;
+}
+
+/* 🌈 Grid Layout */
+.course-container,
+.workshop-container,
+.internship-container,
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  width: 100%;
+}
+
+/* 💎 Card Design */
+.course-card,
+.card{
+  flex: 1 1 320px;
+  max-width: 420px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.15);
+  padding: 2rem;
+  text-align: left;
+  backdrop-filter: blur(15px);
+  transition: all 0.5s ease;
+  position: relative;
+  overflow: hidden;
+  animation: fadeSlideUp 0.9s ease forwards;
+}
+
+
+.card:hover,
+.course-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 0 45px rgba(0, 255, 255, 0.4);
+  border-color: rgba(0, 255, 255, 0.4);
+}
+
+/* ✨ Card Headings */
+.card h2,
+.course-card h3 {
+  font-size: 1.5rem;
+  color: #00eaff;
+  text-shadow: 0 0 10px #00eaff;
+  margin-bottom: 0.6rem;
+}
+
+/* 🧊 Text and Lists */
+.course-info,
+.card p,
+.course-card ul,
+.card ul {
+  color: #ccc;
+}
+
+.card ul,
+.course-card ul {
+  list-style: disc;
+  margin-top: 0.5rem;
+  padding-left: 1.2rem;
+}
+
+.card li,
+.course-card li {
+  margin: 4px 0;
+}
+
+/* 💫 Buttons */
+.btn,
+.btn.glow-btn {
+  display: inline-block;
+  padding: 12px 40px;
+  font-size: 1rem;
+  background: linear-gradient(135deg, #00d4ff, #007bff);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  color: white;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  box-shadow: 0 0 25px rgba(0, 255, 255, 0.3);
+}
+
+.btn:hover,
+.btn.glow-btn:hover {
+  transform: scale(1.08);
+  background: linear-gradient(135deg, #00ffe0, #0095ff);
+  box-shadow: 0 0 40px rgba(0, 255, 255, 0.7);
+}
+
+/* 💰 Price Styling */
+.price {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #00ffe0;
+  margin: 0.5rem 0 1rem;
+}
+
+/* 📘 Syllabus / Details */
+.syllabus {
+  margin-top: 20px;
+  border-top: 1px solid rgba(255,255,255,0.2);
+  padding-top: 15px;
+}
+
+.syllabus h4 {
+  color: #00eaff;
+  margin-bottom: 10px;
+}
+
+.syllabus ul {
+  padding-left: 1.2rem;
+}
+
+.syllabus li {
+  margin: 5px 0;
+  color: #eee;
+}
+
+
+
+/* 🧠 Animations */
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 🌀 Fade-up Class for Scroll Reveal */
+.fade-up {
+  opacity: 0;
+  animation: fadeSlideUp 0.9s ease forwards;
+}
+.fade-up:nth-child(odd) { animation-delay: 0.2s; }
+.fade-up:nth-child(even) { animation-delay: 0.4s; }
+
+/* 📱 Responsive */
+@media (max-width: 768px) {
+  .section-title { font-size: 2.2rem; }
+  .card, .course-card { max-width: 90%; }
+  .btn { padding: 10px 30px; }
+}
+
+/* --- Loader Screen --- */
+.loader-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, #001f3f, #000);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  overflow: hidden;
+  color: #fff;
+  text-align: center;
+}
+
+/* --- Logo Animation --- */
+.loader-logo {
+  width: 120px;
+  height: auto;
+  margin-bottom: 1rem;
+  filter: drop-shadow(0 0 20px #00f7ff);
+  animation: logoPulse 2s infinite ease-in-out alternate;
+}
+
+@keyframes logoPulse {
+  from {
+    transform: scale(1);
+    filter: drop-shadow(0 0 15px #00f7ff);
+  }
+  to {
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 30px #00eaff);
+  }
+}
+
+/* --- Text & Bar --- */
+.loader-screen h1 {
+  font-size: 2rem;
+  text-shadow: 0 0 15px #00f7ff, 0 0 25px #0099ff;
+  letter-spacing: 1px;
+  animation: glowPulse 1.8s ease-in-out infinite alternate;
+}
+
+.loader-screen h1 span {
+  color: #00eaff;
+  text-shadow: 0 0 25px #00eaff;
+}
+
+/* Loading bar */
+.loader-bar {
+  margin-top: 25px;
+  width: 180px;
+  height: 6px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  position: relative;
+}
+
+.loader-bar::before {
+  content: "";
+  position: absolute;
+  left: -40%;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(90deg, #00f7ff, #007bff);
+  animation: slide 2s infinite linear;
+}
+
+@keyframes slide {
+  0% { left: -40%; }
+  100% { left: 100%; }
+}
+
+@keyframes glowPulse {
+  from { text-shadow: 0 0 10px #00f7ff, 0 0 20px #0099ff; }
+  to { text-shadow: 0 0 25px #00f7ff, 0 0 40px #00eaff; }
+}

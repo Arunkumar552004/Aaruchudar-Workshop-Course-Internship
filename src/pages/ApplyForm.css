@@ -1,0 +1,143 @@
+/* ===== ApplyForm Premium CSS ===== */
+.apply-section {
+  min-height: 100vh;
+  background: radial-gradient(circle at top left, #2a0845, #1a1a2e, #0f0c29);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  padding: 50px 20px;
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Subtle animated gradient glow */
+.apply-section::before {
+  content: "";
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(255,255,255,0.2), transparent 70%);
+  animation: float 8s infinite ease-in-out;
+  border-radius: 50%;
+  top: 20%;
+  left: 15%;
+  filter: blur(60px);
+  z-index: 0;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-30px) scale(1.05); }
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  z-index: 2;
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  opacity: 0.8;
+  margin-bottom: 40px;
+  z-index: 2;
+}
+
+/* Form Wrapper */
+.form-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  z-index: 2;
+}
+
+.form-box {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+  border-radius: 20px;
+  padding: 40px;
+  width: 420px;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.form-box:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 40px rgba(155, 100, 255, 0.5);
+}
+
+.form-box h2 {
+  font-size: 1.8rem;
+  margin-bottom: 25px;
+  color: #e0dfff;
+}
+
+/* Inputs & Select */
+form label {
+  display: block;
+  text-align: left;
+  font-size: 0.95rem;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  color: #ccc;
+}
+
+form input,
+form select {
+  width: 100%;
+  padding: 12px 15px;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  transition: all 0.3s ease;
+}
+
+form input:focus,
+form select:focus {
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 10px #8b5cf6;
+}
+
+/* Submit Button */
+.btn {
+  margin-top: 25px;
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  background: linear-gradient(90deg, #6a11cb, #2575fc);
+  color: #fff;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.4s ease;
+}
+
+.btn:hover {
+  background: linear-gradient(90deg, #2575fc, #6a11cb);
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(100, 150, 255, 0.6);
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .form-box {
+    width: 95%;
+    padding: 30px 20px;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+}
