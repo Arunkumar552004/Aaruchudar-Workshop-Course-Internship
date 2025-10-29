@@ -29,14 +29,11 @@ export default function RegisterForm() {
     setMessage("");
 
     try {
-      const res = await fetch(
-        "https://aaruchudar-workshop-course-internship.onrender.com/api/register",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(formData),
-        }
-      );
+      const res = await fetch(`${API_URL}/api/register`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form), // ✅ fixed variable name
+      });
 
       const data = await res.json();
 
@@ -93,9 +90,7 @@ export default function RegisterForm() {
               required
             >
               <option value="">-- Select Course --</option>
-              <option value="Full Stack Development">
-                Full Stack Development
-              </option>
+              <option value="Full Stack Development">Full Stack Development</option>
               <option value="UI/UX Design">UI/UX Design</option>
               <option value="AI & Data Science">AI & Data Science</option>
               <option value="Cloud Computing">Cloud Computing</option>
