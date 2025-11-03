@@ -9,8 +9,9 @@ export default function RegisterForm() {
     phone: "",
   });
 
+   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState("");
+ 
 
   // ✅ Use Render backend or fallback to localhost for local testing
   const API_URL =
@@ -29,15 +30,8 @@ export default function RegisterForm() {
     setMessage("");
 
     try {
-      const res = await fetch(`${API_URL}/api/register`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form), // ✅ fixed variable name
-      });
-
-      const data = await res.json();
-
-      if (data.success) {
+      const res = await axios.post(`${API_URL}/api/register`, form);
+      if (res.data.success) {
         setMessage("✅ Registration Successful!");
         setForm({ name: "", email: "", course: "", phone: "" });
       } else {
